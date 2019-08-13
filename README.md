@@ -4,11 +4,11 @@
 
 ## Introdução à modelagem e avaliação de desempenho de sistemas computacionais
 
-![Sistemas computacionais](./imagens/sistema-computacional-2.jpg)
+![Sistemas computacionais](./imagens/sistema-computacional.jpg)
 
 A prática tem mostrado que frente a um baixo desempenho de sistemas computacionais (baixos níveis de QoS - Quality of Service) os maiores prejuízos financeiros ocorrem pela falta de uma mentalidade voltada para extrair o máximo benefício do investimento. Na prãtica, os responsáveis pelos setores de T.I. se apressam para propostas em mudanças de *hardware* sem mesmo ter esgotado todos os esforços para melhorar os níveis de QoS.
 
-![Curva de desempenho](./imagens/curva-desempenho-2.jpg)
+![Curva de desempenho](./imagens/curva-desempenho.jpg)
 
 A Engenharia de Avaliação de Sistemas computacionais tem por objetivo, frente ao aumento contínuo da carga de trabalho, alimentar a vida útil do sistema, melhorando os níveis de serviço (R - tempo de resposta, U - utilização do sistema) dentro de limites normalmente estipulados pela gerência.
 
@@ -47,3 +47,25 @@ Nesta fase, existe duas possíveis situações:
         <b>Proposta de atualização deconfiguração existente:</b> Para esta situação existem técnicas mais elaboradas como a teoria das filas, simulação discreta, redes de petri, etc. Dentre estas a teoria das filas é mais aplicada para fins comerciais. Isso pelo tempo necessário para implementá-la.
     </li>
 </ol>
+
+#### 2. Fase de aquisição
+
+Aparentemente esta fase parece transmitir uma impressão de simplicidade. Porém é exigido do responsável habilidades e estratégias de negociação e convencimento frente à diretoria e fornecedores. O resultado desta fase possui grandes implicações financeiras para a empresa. Isto torna-se mais sensível em ambientes onde predomina a compra de recursos e de sistemas _leasing_ (aluguel-venda). Neste último, existe maiores responsabilidade do responsável por acompanhar o desempenho do sistema.
+
+Por exemplo, no sistema _leasing_:
+
+![Custo do aluguel e custo de CPU](./imagens/custo-aluguel-cpu.jpg)
+
+Custo do aluguel: Por média ou por pico?
+
+#### 3. Fase operacional
+
+Espera-se que esta fase seja a mais longa de todas (2, 3 a 4 anos). Durante esta fase, o objetivo é extrair o máximo de proveito do investimento. Em outras palavras aumenta a vida últil do sistema, sem troca de configuração de _hardware_ (aumento de memória é permitido).
+
+![Ajuste do limite](./imagens/limite-utilizacao.jpg)
+
+Durante a fase de operação são aplicadas as ações até a **Meta-otimização do sistema**. Ao final desta fase normalmente é realizada a previsão da carga de trabalho.
+
+#### 4. Fase de super-utilização
+
+Esta fase se caracteriza pelo fato da utilização do sistema estar em 100% de forma permanente. Esta fase deve ser previsa com 1 ano de antecedência. Na prática deve ser previsto com no mínimo 3 meses. Muitas vezes nos encontramos já na super-utilização.
