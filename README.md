@@ -69,3 +69,83 @@ Durante a fase de operação são aplicadas as ações até a **Meta-otimizaçã
 #### 4. Fase de super-utilização
 
 Esta fase se caracteriza pelo fato da utilização do sistema estar em 100% de forma permanente. Esta fase deve ser previsa com 1 ano de antecedência. Na prática deve ser previsto com no mínimo 3 meses. Muitas vezes nos encontramos já na super-utilização.
+
+### Aplicações da Metodologia para o planejamento de capacidade de sistemas computacionais
+
+#### 1. Diagnóstico de servidores de aplicação
+
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>Antes</th>
+        <th>Depois</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>🅧</td>
+        <td><b>Memória (%)</b></td>
+        <td>100</td>
+        <td>98</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><b>Paginação (%)</b></td>
+        <td>35</td>
+        <td>5</td>
+        <td><i>Horário de pico<i></td>
+    </tr>
+    <tr>
+        <td>🅧</td>
+        <td><b>CPU (%)</b></td>
+        <td>5</td>
+        <td>5</td>
+        <td></td>
+    </tr>
+</table>
+
+#### 2. Previsão de desempenho de sistemas virtuais de aprendizado
+
+Foram identificados: 80 requisições distintas
+Modelos do sistema: 80 equações
+
+Para simplificar o modelo:
+* Eliminação de processos obsoletos e irrelevantes
+* Redução de processos pela similaridade de características
+
+**Exempo:**
+```
+Saldo Conta Corrente ≡ Saldo Polpança
+Modelo resultante: 5 equações
+```
+#### 3. Em ambientes *leasing*
+
+![Atividade 1 - Ambientes *leasing*](/imagens/ambientes-leasing.jpg)
+
+#### 4. Sistemas de balanceamento de carga
+
+![Atividade 1 - Sistemas de balanceamento de carga](/imagens/sistemas-balanceamento-carga.jpeg)
+
+##### Critérios
+
+1. Envia para o servidor com menor carga;
+2. Tempo de resposta no instante `t`;
+3. Utilização dos servidores;
+4. Disponibilidade.
+
+![Exemplo dos critérios](./imagens/criteiros-exemplo.jpg)
+
+#### 5. Modelando internamente cada servidor
+
+**Lei do fluxo forçado**
+
+![Lei do fluxo forçado](./imagens/lei-fluxo-forcado.jpg)
+
+#### 6. Virtualização
+
+![Virtualização](./imagens/virtualizacao.jpg)
+
+#### 7. Nuvens
+
+![Nuvens](./imagens/nuvem.jpg)
