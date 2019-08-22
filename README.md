@@ -2,6 +2,29 @@
 
 > Agradecimentos ao [Felipe Megale](https://github.com/felipemegale) pelas imagens
 
+## Sumário
+* [Sumário](#sumário)
+* [Introdução à modelagem e avaliação de desempenho de sistemas computacionais](#introdução-à-modelagem-e-avaliação-de-desempenho-de-sistemas-computacionais)
+  * [Ciclo de vida de um sistema computacional](#ciclo-de-vida-de-um-sistema-computacional)
+    * [1. Fase conceitual](#1-fase-conceitual)
+    * [2. Fase de aquisição](#2-fase-de-aquisilção)
+    * [3. Fase operacional](#3-fase-operacional)
+    * [4. Fase de super-utilização](#4-fase-de-super-utilização)
+  * [Aplicações da Metodologia para o planejamento de capacidade de sistemas computacionais](#aplicações-da-metodologia-para-o-planejamento-de-capacidade-de-sistemas-computacionais)
+    * [1. Diagnóstico de servidores de aplicação](#1-diagnóstico-de-servidores-de-aplicação)
+    * [2. Previsão de desempenho de sistemas virtuais de aprendizado](#2-previsão-de-desempenho-de-sistemas-virtuais-de-aprendizado)
+    * [3. Em ambientes *leasing*](#3-em-ambientes-leasing)
+    * [4. Sistemas de balanceamento de carga](#4-sistemas-de-balanceamento-de-carga)
+    * [5. Modelando internamente cada servidor](#5-modelando-internamente-cada-servidor)
+    * [6. Virtualização](#6-virtualização)
+    * [7. Nuvens](#7-nuvens)
+* [Metodologia para o planejamento de capacidade](#metodologia-para-o-planejamento-de-capacidade)
+  * [Etapa 1: Diagnóstico inicial do desempenho do sistema](#etapa-1-diagnóstico-inicial-do-desempenho-do-sistema)
+    * [1. Variáveis a serem observadas](#1-variáveis-a-serem-observadas)
+    * [2. Horários para monitoramento](#2-horários-para-monitoramento)
+    * [3. Tipos de monitores](#3-tipos-de-monitores)
+    * [4. Tempo ode observação e amostragem](#4-tempo-ode-observação-e-amostragem)
+
 ## Introdução à modelagem e avaliação de desempenho de sistemas computacionais
 
 ![Sistemas computacionais](./imagens/sistema-computacional.jpg)
@@ -149,3 +172,81 @@ Modelo resultante: 5 equações
 #### 7. Nuvens
 
 ![Nuvens](./imagens/nuvem.jpg)
+
+## Metodologia para o planejamento de capacidade
+
+A metodologia para o planejamento de capacidade possui uma série de etapas com ações tanto **corretivas** como **preventivas**. A aplicação desta metodologia procura melhorar o desempenho do sistema, aumento da vida útil do sistema dentro dos padrões de qualidade previamente estipulados.
+
+### Etapa 1: Diagnóstico inicial do desempenho do sistema
+
+Durante esta etapa é necessário responder às seguintes questões:
+
+1. Quais variáveis monitorar?
+2. Quando monitorar?
+3. Com quais tipos de monitores devemos monitorar?
+4. Durante quanto tempo devemos monitorar?
+5. De quanto em quanto tempo devemos coletar?
+6. Como sintetizar?
+7. Como visualizar?
+
+#### 1. Variáveis a serem observadas
+
+| Variável | Descrição | Unidade |
+|-|-|-|
+| λ | Requisições que chegam | requisições por segundo |
+| R | Tempo médio de resposta | segundos por requisição |
+| Ui | Utilização da CPU (processamento) | porcentagem |
+| Du | Disponibilidade do sistema | |
+| M | Consumo de memória | porcentagem |
+| Pag | Paginação | porcentagem |
+
+#### 2. Horários para monitoramento
+
+É altamente aconselhável realizar o monitoramento durante o horário de pico. Caso esse horário não seja previamente definido podem ser executadas as seguintes ações:
+
+1. Coleta de dados durante 1 semana
+2. Excepcionalmente durante 1 dia
+3. Em teoria durante 1 ano
+
+É possível também considerar o próprio experiência.
+
+Por exemplo:
+* Setor financeiro:
+````
+P1: 11:00 - 13:00
+P2: 16:00 - 20:00
+````
+* Setor eComerce:
+  * Lojas Americanas:
+![Exemplo da Lojas Americanas](./imagens/lojas-americanas.jpg)
+
+#### 3. Tipos de monitores
+
+Os monitores mais utilizados comercialmente correspondem aos monitores de software, os quais ficam residentes em memória observando todas as interrupções (instruções) do sistema.
+
+Esses monitores consomem memória, CPU, disco e possuem impacto no desempenho do sistema. Existem 2 modalidades:
+
+1. **RMF:** Monitores orientados a <u>eventos</u>. Altamente precisos, porém com grande impacto no desempenho atual do sistema. devem ser evitados quando o sistema é crítico. Estes podem chegar a impactar até 15%.
+
+2. **SMF:** Orientado a amostragem. O sistema é observado de tempos em tempos. São mais imprecisos e redundantes. Comercialmente mais utilizados.
+
+![Exemplo do SMF](/imagens/smf.jpg)
+
+#### 4. Tempo ode observação e amostragem
+
+Para monitores na modalidade SMF 2 parâmetros devem ser ajustados:
+
+```
+T₀: Tempo de observação
+Tₛ: Tempo de amostragem
+```
+O ajuste desses parâmetros dependem dos objetivos:
+
+1. **Para o diagnóstico:** Não existe fortes restrições para ajustar o `T₀` e `Tₛ`.
+  * **Exemplo:**
+```
+T₀ = 30 min, 1h
+Tₛ = 2, 3 até 5h
+
+// Observação: Procurar respeitar a Hipótese do Equilíbrio de Fluxo
+```
