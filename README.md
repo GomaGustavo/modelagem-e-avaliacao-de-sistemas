@@ -142,7 +142,7 @@ Para simplificar o modelo:
 
 **Exempo:**
 ```
-Saldo Conta Corrente ≡ Saldo Polpança
+Saldo Conta Corrente ≡ Saldo Poupança
 Modelo resultante: 5 equações
 ```
 #### 3. Em ambientes *leasing*
