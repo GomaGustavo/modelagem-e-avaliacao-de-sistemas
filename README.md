@@ -23,7 +23,10 @@
     * [1. Variáveis a serem observadas](#1-variáveis-a-serem-observadas)
     * [2. Horários para monitoramento](#2-horários-para-monitoramento)
     * [3. Tipos de monitores](#3-tipos-de-monitores)
-    * [4. Tempo ode observação e amostragem](#4-tempo-ode-observação-e-amostragem)
+    * [4. Tempo de observação e amostragem](#4-tempo-de-observação-e-amostragem)
+    * [5. Visualização de dados para avaliação de desempenho](#5-visualização-de-dados-para-avaliação-de-desempenho)
+  * [Etapa 2: Identificação do horário de pico](#etapa-2-identificação-do-horário-de-pico)
+    * [Procedimentos](#procedimentos)
 
 ## Introdução à modelagem e avaliação de desempenho de sistemas computacionais
 
@@ -212,10 +215,10 @@ Durante esta etapa é necessário responder às seguintes questões:
 
 Por exemplo:
 * Setor financeiro:
-````
-P1: 11:00 - 13:00
-P2: 16:00 - 20:00
-````
+    ```
+    P1: 11:00 - 13:00
+    P2: 16:00 - 20:00
+    ```
 * Setor eComerce:
   * Lojas Americanas:
 ![Exemplo da Lojas Americanas](./imagens/lojas-americanas.jpg)
@@ -232,7 +235,7 @@ Esses monitores consomem memória, CPU, disco e possuem impacto no desempenho do
 
 ![Exemplo do SMF](/imagens/smf.jpg)
 
-#### 4. Tempo ode observação e amostragem
+#### 4. Tempo de observação e amostragem
 
 Para monitores na modalidade SMF 2 parâmetros devem ser ajustados:
 
@@ -240,13 +243,77 @@ Para monitores na modalidade SMF 2 parâmetros devem ser ajustados:
 T₀: Tempo de observação
 Tₛ: Tempo de amostragem
 ```
-O ajuste desses parâmetros dependem dos objetivos:
+O ajuste desses parâmetros dependem dos objetivos.
 
-1. **Para o diagnóstico:** Não existe fortes restrições para ajustar o `T₀` e `Tₛ`.
-  * **Exemplo:**
+Para o diagnóstico não existe fortes restrições para ajustar o `T₀` e `Tₛ`.
+
+**Exemplo:**
 ```
 T₀ = 30 min, 1h
 Tₛ = 2, 3 até 5h
 
 // Observação: Procurar respeitar a Hipótese do Equilíbrio de Fluxo
 ```
+
+1. Objetivo é o diagnóstico
+    ```
+    T₀ = não há restrições
+    Tₛ = 2 a 5 segundos (recomenda-se 3 segundos)
+
+    // Observação: Procurar respeitar a Hipótese do Equilíbrio de Fluxo
+    ```
+
+2. Objetivo é a modelagem
+    ```
+    T₀ = não é possível definir a priori
+    Tₛ = não é possível definir a priori
+
+    // Condições: Respeitar a Hipótese do Equilíbrio de Fluxo e das transições unitárias
+    ```
+
+#### 5. Visualização de dados para avaliação de desempenho
+
+É recomendado a construção de gráficos de valores médios de consumo ao longo das semanas e/ou meses. Referências menores à semana, por dia, não é interessante, pois mostra excessiva variabilidade. O objetivo é observar tendências.
+
+![Visualização de dados para avlaiação de desempenho](./imagens/visualizacao-dados-avaliacao-desempenho.jpg)
+
+![Usuário batch vs. online](./imagens/usuario-batch-vs-online.jpg)
+
+**Observações:**
+1. Batch aumenta ➡️ Online diminui
+2. Batch próximo de 100%
+3. Online abaixo do batch
+4. Não existem variações abruptas
+5. Pouca permanência em condição de alto consumo
+6. Sistema estável, sem variações significativas
+
+### Etapa 2: Identificação do horário de pico
+
+De forma a ser eficientes na melhoria do desempenho do sistema os esforços de otimização devem estar concentrados durante o(s) horário(s) de pico. Daí é imperativo identificar esses horários.
+
+Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano, 24 horas, por dia. A ideia é identificar:
+* Mês mais crítico
+* Semana mais crítica
+* Dia da semana mais crítico
+* Período do dia mais crítico
+
+#### Procedimentos
+
+1. Definir
+    ```
+    T₀ = 365 dias x 24 horas
+    Tₛ = 3 segundos
+    ```
+
+2. Definir períodos do dia
+
+    **Exemplo:**
+    ```
+    P₁ 08:00 - 10:00
+    P₂ 10:01 - 12:00
+    P₃ 12:10 - 18:00
+    P₄ 18:01 - 07:59
+    ```
+
+![Identificação do horário de pico (1)](./imagens/identificacao-do-horario-de-pico-1.jpg)
+![Identificação do horário de pico (2)](./imagens/identificacao-do-horario-de-pico-2.jpg)
