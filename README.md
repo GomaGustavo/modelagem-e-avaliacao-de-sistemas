@@ -317,3 +317,31 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 
 ![Identificação do horário de pico (1)](./imagens/identificacao-do-horario-de-pico-1.jpg)
 ![Identificação do horário de pico (2)](./imagens/identificacao-do-horario-de-pico-2.jpg)
+
+
+### (Continuação) otimização pos escalonamento 
+
+![Otimizacao pos escalonamento (1)](./imagens/otimizacao-pos-escalonamento-1.png)
+
+Como mencionado, o processo de escalonamento é uma ação bastante efetiva para melhoramento do desempenho do sistema. O objetivo do planejamento é programar a execução de jobs ao longo do dia.
+
+Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento <u>CONTROLADO</u> de execuções de processos.
+
+![Otimização pos escalonamento (2)](./imagens/otimizacao-pos-escalonamento-2.png)
+
+Tecnologia ICL - Job Control Lenguage
+
+![Otimização pos escalonamento (3)](./imagens/otimizacao-pos-escalonamento-3.png)
+
+## Otimização de disco:
+
+Em sistemas corporativos, as bases de dados não são armazenadas permanentemente em disco. Isto por dois motivos: custos altos e segurança fisica. Muitas bases de dados são armazenadas em fita e dispitam espaço nos discos, o que leva ao aumento da atividade de I/O em disco deteriorando o desempenho global do sistema. 
+
+Qual é o impacto do acesso ao disco? 
+
+![Otimização de disco (1)](./imagens/otimizacao-de-disco-1.png)
+
+#### a) Reduzindo o numero de operações de I/O em disco.
+
+![Otimização de disco (2)](./imagens/otimizacao-de-disco-2.png)
+
