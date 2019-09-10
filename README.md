@@ -1,6 +1,6 @@
 # Modelagem e avaliação de desempenho
 
-> Agradecimentos ao [Felipe Megale](https://github.com/felipemegale) pelas imagens
+> Agradecimentos ao [Felipe Megale](https://github.com/felipemegale) e [Otto Bittencourt](https://github.com/OttoWBitt) pelas imagens
 
 ## Sumário
 * [Sumário](#sumário)
@@ -27,6 +27,8 @@
     * [5. Visualização de dados para avaliação de desempenho](#5-visualização-de-dados-para-avaliação-de-desempenho)
   * [Etapa 2: Identificação do horário de pico](#etapa-2-identificação-do-horário-de-pico)
     * [Procedimentos](#procedimentos)
+      * [Otimização pós-escalonamento](#otimização-pós-escalonamento)
+      * [Otimização de disco](#otimização-de-disco)
 
 ## Introdução à modelagem e avaliação de desempenho de sistemas computacionais
 
@@ -317,3 +319,26 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 
 ![Identificação do horário de pico (1)](./imagens/identificacao-do-horario-de-pico-1.jpg)
 ![Identificação do horário de pico (2)](./imagens/identificacao-do-horario-de-pico-2.jpg)
+
+
+##### Otimização pós-escalonamento
+
+![Otimizacao pos escalonamento (1)](./imagens/otimizacao-pos-escalonamento-1.png)
+
+Como mencionado, o processo de escalonamento é uma ação bastante efetiva para melhoramento do desempenho do sistema. O objetivo do planejamento é programar a execução de jobs ao longo do dia.
+
+Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento <b>controlado</b> de execuções de processos.
+
+![Otimização pos escalonamento (2)](./imagens/otimizacao-pos-escalonamento-2.png)
+
+![Otimização pos escalonamento (3)](./imagens/otimizacao-pos-escalonamento-3.png)
+
+##### Otimização de disco
+
+Em sistemas corporativos, as bases de dados não são armazenadas permanentemente em disco. Isto por dois motivos: custos altos e segurança fisica. Muitas bases de dados são armazenadas em fita e dispitam espaço nos discos, o que leva ao aumento da atividade de I/O em disco deteriorando o desempenho global do sistema.
+
+![Otimização de disco (1)](./imagens/otimizacao-de-disco-1.png)
+
+###### a) Reduzindo o numero de operações de I/O em disco
+
+![Otimização de disco (2)](./imagens/otimizacao-de-disco-2.png)
