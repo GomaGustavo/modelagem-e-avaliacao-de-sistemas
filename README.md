@@ -342,3 +342,47 @@ Em sistemas corporativos, as bases de dados não são armazenadas permanentement
 ###### a) Reduzindo o numero de operações de I/O em disco
 
 ![Otimização de disco (2)](./imagens/otimizacao-de-disco-2.png)
+
+![Modelo de operações em disco](./imagens/modelo-operacoes-disco.jpg)
+
+**Modelo ideal**
+![Modelo ideal de operações em disco](./imagens/modelo-operacoes-disco-ideal.jpg)
+> **Observação:** O modelo de organização ideal deve levar em conta:
+> * O tamanho e a frequência de acesso ao arquivo de dados
+
+**Buffer maiores:** Grandes com grandes frequências
+**Buffer menores:** Grandes arquivos com pouquíssima frequência (esta situação pode indicar acesso direto ao registro em disco, por meio de código em Assembly)
+> **Observação:** O objetivo é encontrar o tamanho de buffer ideal
+
+Em sistemas operacionais virtual machine é possível ajustar o buffer de disco sob demanda, durante uma seção que pode caracteriar a execução de um Job.
+
+Os sistemas operacionais virtuais fornecem uma formula para ajustar o tamanho do bloco:
+
+```
+FB = sizeOfRecord * numberOfRecords
+```
+
+Exemplo:
+```
+sizeOfRecord = 1000B
+numberOfRecords = 100
+FB = 100000B
+```
+
+Notemos que podemos ajustar o FB sem cálculo
+
+```
+FB = 110000B
+```
+
+###### b) Técnica de cilindro para redução do tempo de movimento do braço
+
+Em sistemas virtual machine é possível utilizar a técnica de discos em cilindro. É a melhor técnica para diminuir a operação de disco.
+
+![Técnica de cilindro](./imagens/tecnica-cilindro-disco.jpg)
+
+###### c) Redução do nível de fragmentação de disco
+
+Na prática os discos são recursos escassos. Qualquer organização armazena permanentemente seus arquivos em fita. Por esse motivo quando arquivos (base de dados) precisam de acesso aleatório o arquivo deve ser baixado para disco e dessa forma o arquivo compete por espaço com outros arquivos. Isto aumenta o nível de fragmentação.
+
+![Esquema de um disco](./imagens/reducao-nivel-fragmentacao-disco.jpg)
