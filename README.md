@@ -386,3 +386,57 @@ Em sistemas virtual machine é possível utilizar a técnica de discos em cilind
 Na prática os discos são recursos escassos. Qualquer organização armazena permanentemente seus arquivos em fita. Por esse motivo quando arquivos (base de dados) precisam de acesso aleatório o arquivo deve ser baixado para disco e dessa forma o arquivo compete por espaço com outros arquivos. Isto aumenta o nível de fragmentação.
 
 ![Esquema de um disco](./imagens/reducao-nivel-fragmentacao-disco.jpg)
+
+### Etapa 8: Modelagem do sistema computacional
+
+A modelagem do sistema computacional deve ser iniciada quando for alcançado um correto escalonamento de serviços. Isto pelo fato dos modelos possuírem tantas equações como distintos processos sendo executados num determinado horário. Daí para utilizar o modelo para fim de previsão é necessário garantir que a natureza da carga é a mesma.
+
+![Modelagem do sistema computacional](./imagens/modelagem-do-sistema-computacional.jpg)
+
+`Di`: Tempo total gasto por uma requisição no dispositivo `i` sem considerar tempo de espera.
+`Ui`: Utilização do dispositivo `i`
+`R`: Tempo médio por requisição (segundos/requisição)
+
+```
+Di = Ui / X0, X0 = requisições/segundo
+```
+
+**Exemplo:**
+```
+T0 = 1h
+C0 = Concluída 7200 requisições
+Ucpu = 60%
+Ud1 = 50%
+Ud2 = 80%
+Ud3 = 90%
+
+R = ((0.6 / 2) / (1 - 0.6))
+  + ((0.5 / 2) / (1 - 0.5))
+  + ((0.8 / 2) / (1 - 0.8))
+  + ((0.9 / 2) / (1 - 0.9))
+// Simplificando
+R = 0.75 + 0.5 + 2 + 4.5
+R = 7.75 segundos/requisição
+```
+
+**Exemplo (aumentando a carga em 10%):**
+```
+R = (0.3  / (1 - 0.66))
+  + (0.25 / (1 - 0.55))
+  + (0.4  / (1 - 0.88))
+  + (0.45 / (1 - 0.99))
+// Simplificando
+R = 0.88 + 0.55 + 3.33 + 45
+R = 49.76 segundos/requisição
+```
+
+**Exemplo (melhorando o código):**
+```
+R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
+  + 0.55
+  + 3.33
+  + 45
+// Simplificando
+R = 0.66 + 0.55 + 3.33 + 45
+R = 49.54 segundos/requisição
+```
