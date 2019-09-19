@@ -491,3 +491,17 @@ Considerando os modelos de carga de trabalho e do sistema, o próximo passo é a
 * Limites de QoS
 
 ![Proposta da nova configuração](./imagens/proposta-nova-configuracao.jpg)
+
+### Etapa 11: Negociação com diretoria e fornecedores
+
+Após obtenção de configuração ideal a próxima etapa procura a negociação com a diretoria e os fornecedores de forma a adquirir a nova configuração.
+
+Esta etapa, aparentemente a menos relevante, possui grande impacto financeiro, especialmente quando aplica sistemas *leasing* ou de aluguel de recursos.
+
+![](./imagens/negociacao-diretoria-fornecedores-exemplo-leasing.jpg)
+
+Nesta etapa é necessário o convencimento que a troca de hardware é necessária.
+
+<img src="./imagens/negociacao-diretoria-fornecedores.1.jpg" /> <img src="./imagens/negociacao-diretoria-fornecedores.2.jpg" />
+
+### Etapa 12: Voltar ao passo 1
