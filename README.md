@@ -440,3 +440,54 @@ R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
 R = 0.66 + 0.55 + 3.33 + 45
 R = 49.54 segundos/requisição
 ```
+
+
+### Etapa 9: Previsão do surgimento da fase de super-utilização
+
+Tendo construído modelos para a carga de trabalho e do sistema computacional, esta etapa propõe prever o início da fase de super-utilização.
+
+A fase de super-utiliação se caracteriza pelo fato de terminas alcançado a saturação do sistema (100% de utilização do processador) kde forma permanente.
+
+O termo permanente é um termo relativo e depende da finalidade do sistema computacional.
+
+Por exemplo:
+* Em sistemas de e-commerce
+  * Permanente: Saturado acima de 10% do horário de pico.
+    * Se horário de pico: 12:00 - 13:00
+    * "Permanente" > 6 min
+* Em sistemas acadêmicos
+  * Permanente: Saturado acima de 60% do horário de pico
+    * Se horário de pico: 12:00 - 13:00
+    * "Permanente" > 36 min
+
+É sugerido que a super-utilização seja prevista com 1 ano de antecedência, porém na prática ocorre 4 a 6 meses. Muitos sistemas já vivem na fase de super-utilização.
+
+#### Como determinar o tempo para a fase de super-utilização?
+
+![Como determinar o tempo para a fase de super-utilização](./imagens/previsao-surgimento-fase-superutilizacao.jpg)
+
+#### Quando vai acontecer?
+
+```
+λ-médio = λ-sat = a + b * t
+t-sat = (λ-sat - a) / b
+```
+
+**Tempo até `λ-sat` ocorrer:**
+```
+tempo = t-sat - hist. meses
+```
+
+**Exemplo:**
+
+![Exemplo de super-utilização](./imagens/previsao-surgimento-fase-superutilizacao-exemplo.jpg)
+
+### Etapa 10: Proposta da nova configuração
+
+Considerando os modelos de carga de trabalho e do sistema, o próximo passo é ajustar uma configuração que atenda requisitos como:
+
+* Vida útil do sistema
+* Disponibilidade do sistema
+* Limites de QoS
+
+![Proposta da nova configuração](./imagens/proposta-nova-configuracao.jpg)
