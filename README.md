@@ -3,6 +3,7 @@
 > Agradecimentos ao [Felipe Megale](https://github.com/felipemegale) e [Otto Bittencourt](https://github.com/OttoWBitt) pelas imagens
 
 ## Sumário
+
 * [Sumário](#sumário)
 * [Introdução à modelagem e avaliação de desempenho de sistemas computacionais](#introdução-à-modelagem-e-avaliação-de-desempenho-de-sistemas-computacionais)
   * [Ciclo de vida de um sistema computacional](#ciclo-de-vida-de-um-sistema-computacional)
@@ -102,36 +103,11 @@ Esta fase se caracteriza pelo fato da utilização do sistema estar em 100% de f
 
 #### 1. Diagnóstico de servidores de aplicação
 
-<table>
-    <tr>
-        <th></th>
-        <th></th>
-        <th>Antes</th>
-        <th>Depois</th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>🅧</td>
-        <td><b>Memória (%)</b></td>
-        <td>100</td>
-        <td>98</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><b>Paginação (%)</b></td>
-        <td>35</td>
-        <td>5</td>
-        <td><i>Horário de pico<i></td>
-    </tr>
-    <tr>
-        <td>🅧</td>
-        <td><b>CPU (%)</b></td>
-        <td>5</td>
-        <td>5</td>
-        <td></td>
-    </tr>
-</table>
+|    |                   | Antes | Depois |                   |
+|----|-------------------|-------|--------|-------------------|
+| 🅧 | **Memória (%)**   |   100 |     98 |                   |
+|    | **Paginação (%)** |    35 |      5 | _Horário de pico_ |
+| 🅧 | **CPU (%)**       |     5 |      5 |                   |
 
 #### 2. Previsão de desempenho de sistemas virtuais de aprendizado
 
@@ -139,14 +115,17 @@ Foram identificados: 80 requisições distintas
 Modelos do sistema: 80 equações
 
 Para simplificar o modelo:
+
 * Eliminação de processos obsoletos e irrelevantes
 * Redução de processos pela similaridade de características
 
 **Exempo:**
-```
+
+```text
 Saldo Conta Corrente ≡ Saldo Poupança
 Modelo resultante: 5 equações
 ```
+
 #### 3. Em ambientes *leasing*
 
 ![Atividade 1 - Ambientes *leasing*](/imagens/ambientes-leasing.jpg)
@@ -166,7 +145,7 @@ Modelo resultante: 5 equações
 
 #### 5. Modelando internamente cada servidor
 
-**Lei do fluxo forçado**
+##### Lei do fluxo forçado
 
 ![Lei do fluxo forçado](./imagens/lei-fluxo-forcado.jpg)
 
@@ -216,11 +195,14 @@ Durante esta etapa é necessário responder às seguintes questões:
 É possível também considerar o próprio experiência.
 
 Por exemplo:
+
 * Setor financeiro:
-    ```
+
+    ```text
     P1: 11:00 - 13:00
     P2: 16:00 - 20:00
     ```
+
 * Setor eComerce:
   * Lojas Americanas:
 ![Exemplo da Lojas Americanas](./imagens/lojas-americanas.jpg)
@@ -241,16 +223,18 @@ Esses monitores consomem memória, CPU, disco e possuem impacto no desempenho do
 
 Para monitores na modalidade SMF 2 parâmetros devem ser ajustados:
 
-```
+```text
 T₀: Tempo de observação
 Tₛ: Tempo de amostragem
 ```
+
 O ajuste desses parâmetros dependem dos objetivos.
 
 Para o diagnóstico não existe fortes restrições para ajustar o `T₀` e `Tₛ`.
 
 **Exemplo:**
-```
+
+```text
 T₀ = 30 min, 1h
 Tₛ = 2, 3 até 5h
 
@@ -258,7 +242,8 @@ Tₛ = 2, 3 até 5h
 ```
 
 1. Objetivo é o diagnóstico
-    ```
+
+    ```text
     T₀ = não há restrições
     Tₛ = 2 a 5 segundos (recomenda-se 3 segundos)
 
@@ -266,7 +251,8 @@ Tₛ = 2, 3 até 5h
     ```
 
 2. Objetivo é a modelagem
-    ```
+
+    ```text
     T₀ = não é possível definir a priori
     Tₛ = não é possível definir a priori
 
@@ -282,6 +268,7 @@ Tₛ = 2, 3 até 5h
 ![Usuário batch vs. online](./imagens/usuario-batch-vs-online.jpg)
 
 **Observações:**
+
 1. Batch aumenta ➡️ Online diminui
 2. Batch próximo de 100%
 3. Online abaixo do batch
@@ -294,6 +281,7 @@ Tₛ = 2, 3 até 5h
 De forma a ser eficientes na melhoria do desempenho do sistema os esforços de otimização devem estar concentrados durante o(s) horário(s) de pico. Daí é imperativo identificar esses horários.
 
 Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano, 24 horas, por dia. A ideia é identificar:
+
 * Mês mais crítico
 * Semana mais crítica
 * Dia da semana mais crítico
@@ -302,7 +290,8 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 #### Procedimentos
 
 1. Definir
-    ```
+
+    ```text
     T₀ = 365 dias x 24 horas
     Tₛ = 3 segundos
     ```
@@ -310,7 +299,8 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 2. Definir períodos do dia
 
     **Exemplo:**
-    ```
+
+    ```text
     P₁ 08:00 - 10:00
     P₂ 10:01 - 12:00
     P₃ 12:10 - 18:00
@@ -320,14 +310,13 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 ![Identificação do horário de pico (1)](./imagens/identificacao-do-horario-de-pico-1.jpg)
 ![Identificação do horário de pico (2)](./imagens/identificacao-do-horario-de-pico-2.jpg)
 
-
 ##### Otimização pós-escalonamento
 
 ![Otimizacao pos escalonamento (1)](./imagens/otimizacao-pos-escalonamento-1.png)
 
 Como mencionado, o processo de escalonamento é uma ação bastante efetiva para melhoramento do desempenho do sistema. O objetivo do planejamento é programar a execução de jobs ao longo do dia.
 
-Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento <b>controlado</b> de execuções de processos.
+Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento **controlado** de execuções de processos.
 
 ![Otimização pos escalonamento (2)](./imagens/otimizacao-pos-escalonamento-2.png)
 
@@ -347,23 +336,27 @@ Em sistemas corporativos, as bases de dados não são armazenadas permanentement
 
 **Modelo ideal**
 ![Modelo ideal de operações em disco](./imagens/modelo-operacoes-disco-ideal.jpg)
+
 > **Observação:** O modelo de organização ideal deve levar em conta:
+>
 > * O tamanho e a frequência de acesso ao arquivo de dados
 
 **Buffer maiores:** Grandes com grandes frequências
 **Buffer menores:** Grandes arquivos com pouquíssima frequência (esta situação pode indicar acesso direto ao registro em disco, por meio de código em Assembly)
+
 > **Observação:** O objetivo é encontrar o tamanho de buffer ideal
 
 Em sistemas operacionais virtual machine é possível ajustar o buffer de disco sob demanda, durante uma seção que pode caracteriar a execução de um Job.
 
 Os sistemas operacionais virtuais fornecem uma formula para ajustar o tamanho do bloco:
 
-```
+```text
 FB = sizeOfRecord * numberOfRecords
 ```
 
-Exemplo:
-```
+**Exemplo:**
+
+```text
 sizeOfRecord = 1000B
 numberOfRecords = 100
 FB = 100000B
@@ -371,7 +364,7 @@ FB = 100000B
 
 Notemos que podemos ajustar o FB sem cálculo
 
-```
+```text
 FB = 110000B
 ```
 
@@ -397,12 +390,13 @@ A modelagem do sistema computacional deve ser iniciada quando for alcançado um 
 `Ui`: Utilização do dispositivo `i`
 `R`: Tempo médio por requisição (segundos/requisição)
 
-```
+```text
 Di = Ui / X0, X0 = requisições/segundo
 ```
 
 **Exemplo:**
-```
+
+```text
 T0 = 1h
 C0 = Concluída 7200 requisições
 Ucpu = 60%
@@ -420,7 +414,8 @@ R = 7.75 segundos/requisição
 ```
 
 **Exemplo (aumentando a carga em 10%):**
-```
+
+```text
 R = (0.3  / (1 - 0.66))
   + (0.25 / (1 - 0.55))
   + (0.4  / (1 - 0.88))
@@ -431,7 +426,8 @@ R = 49.76 segundos/requisição
 ```
 
 **Exemplo (melhorando o código):**
-```
+
+```text
 R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
   + 0.55
   + 3.33
@@ -440,7 +436,6 @@ R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
 R = 0.66 + 0.55 + 3.33 + 45
 R = 49.54 segundos/requisição
 ```
-
 
 ### Etapa 9: Previsão do surgimento da fase de super-utilização
 
@@ -451,6 +446,7 @@ A fase de super-utiliação se caracteriza pelo fato de terminas alcançado a sa
 O termo permanente é um termo relativo e depende da finalidade do sistema computacional.
 
 Por exemplo:
+
 * Em sistemas de e-commerce
   * Permanente: Saturado acima de 10% do horário de pico.
     * Se horário de pico: 12:00 - 13:00
@@ -468,13 +464,14 @@ Por exemplo:
 
 #### Quando vai acontecer?
 
-```
+```text
 λ-médio = λ-sat = a + b * t
 t-sat = (λ-sat - a) / b
 ```
 
 **Tempo até `λ-sat` ocorrer:**
-```
+
+```text
 tempo = t-sat - hist. meses
 ```
 
@@ -498,10 +495,11 @@ Após obtenção de configuração ideal a próxima etapa procura a negociação
 
 Esta etapa, aparentemente a menos relevante, possui grande impacto financeiro, especialmente quando aplica sistemas *leasing* ou de aluguel de recursos.
 
-![](./imagens/negociacao-diretoria-fornecedores-exemplo-leasing.jpg)
+![Negociação com diretoria e fornecedores - Exemplo leasing](./imagens/negociacao-diretoria-fornecedores-exemplo-leasing.jpg)
 
 Nesta etapa é necessário o convencimento que a troca de hardware é necessária.
 
-<img src="./imagens/negociacao-diretoria-fornecedores.1.jpg" /> <img src="./imagens/negociacao-diretoria-fornecedores.2.jpg" />
+![Negociação com diretoria e fornecedores (1)](./imagens/negociacao-diretoria-fornecedores.1.jpg)
+![Negociação com diretoria e fornecedores (2)](./imagens/negociacao-diretoria-fornecedores.2.jpg)
 
 ### Etapa 12: Voltar ao passo 1
