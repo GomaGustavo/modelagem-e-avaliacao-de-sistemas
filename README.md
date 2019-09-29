@@ -507,6 +507,7 @@ b = (m * sum(t * λ) - sum(t) * sum(λ)) / (m * sum(t²) - sum(t)²)
 ```
 
 **Exemplo:**
+
 | Mês | `λ-médio` |
 |-|:-:|
 | Janeiro | 2 |
@@ -535,7 +536,7 @@ b = (4 * 43 - 10 * 5) / (120 - 100)
 λ-estimado = 1 + 1,1 * t
 ```
 
-| Mês       | `λ-médio` | `λ-estimado` | `|erro|` |
+| Mês       | `λ-médio` | `λ-estimado` | \|erro\| |
 |-----------|:---------:|:------------:|:--------:|
 | Janeiro   |         2 |          2,1 |      0,1 |
 | Fevereiro |         4 |          3,2 |      0,8 |
