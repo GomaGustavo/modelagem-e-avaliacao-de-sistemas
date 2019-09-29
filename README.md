@@ -2,34 +2,6 @@
 
 > Agradecimentos ao [Felipe Megale](https://github.com/felipemegale) e [Otto Bittencourt](https://github.com/OttoWBitt) pelas imagens
 
-## Sumário
-* [Sumário](#sumário)
-* [Introdução à modelagem e avaliação de desempenho de sistemas computacionais](#introdução-à-modelagem-e-avaliação-de-desempenho-de-sistemas-computacionais)
-  * [Ciclo de vida de um sistema computacional](#ciclo-de-vida-de-um-sistema-computacional)
-    * [1. Fase conceitual](#1-fase-conceitual)
-    * [2. Fase de aquisição](#2-fase-de-aquisilção)
-    * [3. Fase operacional](#3-fase-operacional)
-    * [4. Fase de super-utilização](#4-fase-de-super-utilização)
-  * [Aplicações da Metodologia para o planejamento de capacidade de sistemas computacionais](#aplicações-da-metodologia-para-o-planejamento-de-capacidade-de-sistemas-computacionais)
-    * [1. Diagnóstico de servidores de aplicação](#1-diagnóstico-de-servidores-de-aplicação)
-    * [2. Previsão de desempenho de sistemas virtuais de aprendizado](#2-previsão-de-desempenho-de-sistemas-virtuais-de-aprendizado)
-    * [3. Em ambientes *leasing*](#3-em-ambientes-leasing)
-    * [4. Sistemas de balanceamento de carga](#4-sistemas-de-balanceamento-de-carga)
-    * [5. Modelando internamente cada servidor](#5-modelando-internamente-cada-servidor)
-    * [6. Virtualização](#6-virtualização)
-    * [7. Nuvens](#7-nuvens)
-* [Metodologia para o planejamento de capacidade](#metodologia-para-o-planejamento-de-capacidade)
-  * [Etapa 1: Diagnóstico inicial do desempenho do sistema](#etapa-1-diagnóstico-inicial-do-desempenho-do-sistema)
-    * [1. Variáveis a serem observadas](#1-variáveis-a-serem-observadas)
-    * [2. Horários para monitoramento](#2-horários-para-monitoramento)
-    * [3. Tipos de monitores](#3-tipos-de-monitores)
-    * [4. Tempo de observação e amostragem](#4-tempo-de-observação-e-amostragem)
-    * [5. Visualização de dados para avaliação de desempenho](#5-visualização-de-dados-para-avaliação-de-desempenho)
-  * [Etapa 2: Identificação do horário de pico](#etapa-2-identificação-do-horário-de-pico)
-    * [Procedimentos](#procedimentos)
-      * [Otimização pós-escalonamento](#otimização-pós-escalonamento)
-      * [Otimização de disco](#otimização-de-disco)
-
 ## Introdução à modelagem e avaliação de desempenho de sistemas computacionais
 
 ![Sistemas computacionais](./imagens/sistema-computacional.jpg)
@@ -102,36 +74,11 @@ Esta fase se caracteriza pelo fato da utilização do sistema estar em 100% de f
 
 #### 1. Diagnóstico de servidores de aplicação
 
-<table>
-    <tr>
-        <th></th>
-        <th></th>
-        <th>Antes</th>
-        <th>Depois</th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>🅧</td>
-        <td><b>Memória (%)</b></td>
-        <td>100</td>
-        <td>98</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><b>Paginação (%)</b></td>
-        <td>35</td>
-        <td>5</td>
-        <td><i>Horário de pico<i></td>
-    </tr>
-    <tr>
-        <td>🅧</td>
-        <td><b>CPU (%)</b></td>
-        <td>5</td>
-        <td>5</td>
-        <td></td>
-    </tr>
-</table>
+|    |                   | Antes | Depois |                   |
+|----|-------------------|:-----:|:------:|-------------------|
+| ❌ | **Memória (%)**   |   100 |     98 |                   |
+|    | **Paginação (%)** |    35 |      5 | _Horário de pico_ |
+| ❌ | **CPU (%)**       |     5 |      5 |                   |
 
 #### 2. Previsão de desempenho de sistemas virtuais de aprendizado
 
@@ -139,14 +86,17 @@ Foram identificados: 80 requisições distintas
 Modelos do sistema: 80 equações
 
 Para simplificar o modelo:
+
 * Eliminação de processos obsoletos e irrelevantes
 * Redução de processos pela similaridade de características
 
 **Exempo:**
-```
+
+```text
 Saldo Conta Corrente ≡ Saldo Poupança
 Modelo resultante: 5 equações
 ```
+
 #### 3. Em ambientes *leasing*
 
 ![Atividade 1 - Ambientes *leasing*](/imagens/ambientes-leasing.jpg)
@@ -166,7 +116,7 @@ Modelo resultante: 5 equações
 
 #### 5. Modelando internamente cada servidor
 
-**Lei do fluxo forçado**
+##### Lei do fluxo forçado
 
 ![Lei do fluxo forçado](./imagens/lei-fluxo-forcado.jpg)
 
@@ -216,11 +166,14 @@ Durante esta etapa é necessário responder às seguintes questões:
 É possível também considerar o próprio experiência.
 
 Por exemplo:
+
 * Setor financeiro:
-    ```
+
+    ```text
     P1: 11:00 - 13:00
     P2: 16:00 - 20:00
     ```
+
 * Setor eComerce:
   * Lojas Americanas:
 ![Exemplo da Lojas Americanas](./imagens/lojas-americanas.jpg)
@@ -241,16 +194,18 @@ Esses monitores consomem memória, CPU, disco e possuem impacto no desempenho do
 
 Para monitores na modalidade SMF 2 parâmetros devem ser ajustados:
 
-```
+```text
 T₀: Tempo de observação
 Tₛ: Tempo de amostragem
 ```
+
 O ajuste desses parâmetros dependem dos objetivos.
 
 Para o diagnóstico não existe fortes restrições para ajustar o `T₀` e `Tₛ`.
 
 **Exemplo:**
-```
+
+```text
 T₀ = 30 min, 1h
 Tₛ = 2, 3 até 5h
 
@@ -258,7 +213,8 @@ Tₛ = 2, 3 até 5h
 ```
 
 1. Objetivo é o diagnóstico
-    ```
+
+    ```text
     T₀ = não há restrições
     Tₛ = 2 a 5 segundos (recomenda-se 3 segundos)
 
@@ -266,7 +222,8 @@ Tₛ = 2, 3 até 5h
     ```
 
 2. Objetivo é a modelagem
-    ```
+
+    ```text
     T₀ = não é possível definir a priori
     Tₛ = não é possível definir a priori
 
@@ -282,6 +239,7 @@ Tₛ = 2, 3 até 5h
 ![Usuário batch vs. online](./imagens/usuario-batch-vs-online.jpg)
 
 **Observações:**
+
 1. Batch aumenta ➡️ Online diminui
 2. Batch próximo de 100%
 3. Online abaixo do batch
@@ -294,15 +252,17 @@ Tₛ = 2, 3 até 5h
 De forma a ser eficientes na melhoria do desempenho do sistema os esforços de otimização devem estar concentrados durante o(s) horário(s) de pico. Daí é imperativo identificar esses horários.
 
 Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano, 24 horas, por dia. A ideia é identificar:
+
 * Mês mais crítico
 * Semana mais crítica
 * Dia da semana mais crítico
 * Período do dia mais crítico
 
-#### Procedimentos
+**Procedimentos**
 
 1. Definir
-    ```
+
+    ```text
     T₀ = 365 dias x 24 horas
     Tₛ = 3 segundos
     ```
@@ -310,7 +270,8 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 2. Definir períodos do dia
 
     **Exemplo:**
-    ```
+
+    ```text
     P₁ 08:00 - 10:00
     P₂ 10:01 - 12:00
     P₃ 12:10 - 18:00
@@ -320,6 +281,68 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 ![Identificação do horário de pico (1)](./imagens/identificacao-do-horario-de-pico-1.jpg)
 ![Identificação do horário de pico (2)](./imagens/identificacao-do-horario-de-pico-2.jpg)
 
+### Etapa 3: Coleta de dados acerca do consumo de recursos por processos
+
+Após a identificação do(s) horário(s) de pico do sistema, o próximo passo é realizar uma nova coleta do consumo de recursos por cada processo sendo executado nesses horários. O objetivo é podermos identificar processos críticos e tornar o processo de otimização mais efetivo.
+
+Durante a coleta, devem ser consideradas duas classes de variáveis:
+
+| Qualitativas               | Quantitativas                        |
+|----------------------------|--------------------------------------|
+| Otimizações                | Meta otimização                      |
+| ID de processos            | Número de execuções                  |
+| Sistema Job vinculado      | Horas de CPU gasto (total, médio)    |
+| Horário de disponibilidade | Consumo médio de memória/execução    |
+| Horário de finalização     | Nível médio de paginação             |
+| Job Batch/Online           | Número de I/O em disco                |
+|                            | Tempo total gasto de acesso ao disco |
+
+> **Observação:** Dados coletados durante o horário de pico
+
+### Etapa 4: Seleção de processo crítico
+
+De forma a tomar o processo de otimização mais eficiente, é interessante comelar pelos processos mais críticos, deixando por último os de menor impacto.
+
+É importante ressaltar que esses critérios são uma recomendação. em outras palavras, todos os processos devem ser analizados e otimizados se possível.
+
+| CPU | Memória | Número de execuções | I/O | Tempo |
+|:---:|:-------:|:-------------------:|:---:|:-----:|
+| ➕   | ➕       | ➕                   | ➕   | ➕     |
+| ➕   | ➕       |                     |     |       |
+|     | ➕       | ➕                   | ➕   | ➕     |
+|     |         | ➕                   | ➕   | ➕     |
+|     |         |                     | ➕   | ➕     |
+|     |         | ➕                   |     |       |
+
+> Sugestão de ordem de observação
+
+### Etapa 5: Otimização do sistema
+
+Após as identificações dos processos críticos, a próxima etapa é a proposta de soluções de otimizações dentre as ações:
+
+#### 1. Diminuir as portas de acesso ao sistema
+
+Esta não é otimização, somente melhora pleativamente o desempenho
+
+#### 2. Recodificação de programas
+
+É uma alternativa quando as aplicações demandam principalmente de códigos de programa. Possui pouco impacto no melhoramento da performace.
+
+#### 3. Escalonamento adequado do sistema
+
+Na prática esta ação é a mais aplicada na busca do melhoramento do sistema. Consistem em movimentar jobs (não requisições do ambiente online) para outros horários menos críticos. Altamente eficiente, mas com dificuldades de implementação:
+
+* Exige mudanças culturais das rotinas administrativas do negócio
+* Pode existir limitações para a movimentação em outros horários. O ideal seria para horários batch (noturno). Na prática a movimentação pode afetar outros horários de pico.
+* Para aplicar racionalmente, e ser eficiente, a técnica do escalonamento será mais efetiva se tivermos uma ideia clara de todos os horários de pico da instalação. Caso esses horários não sejam conhecidos, somente após 1 ano podemos alcançar a sua efetividade.
+
+A otimização por escalonamento de serviços possui 2 principais aplicações:
+
+1. Partindo do princípio que não é possível otimizar o "caos", o escalonamento ajuda na programação das rotinas de execução diária dos diversos processos. Notemos que outras ações corretivas podem ser aplicadas durante a aplicação da técnica de escalonamento.
+
+![Caos vs. escalonamento](./imagens/caos-vs-escalonamento.jpg)
+
+2. Somente após o escalonamento é possível modelar o sistema e propor novas configurações.
 
 ##### Otimização pós-escalonamento
 
@@ -327,7 +350,7 @@ Para isto, deve ser feita uma coleta do consumo do processador ao longo de 1 ano
 
 Como mencionado, o processo de escalonamento é uma ação bastante efetiva para melhoramento do desempenho do sistema. O objetivo do planejamento é programar a execução de jobs ao longo do dia.
 
-Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento <b>controlado</b> de execuções de processos.
+Em sistemas operacionais, virtual machine, existem tecnologias para auxiliar no planejamento **controlado** de execuções de processos.
 
 ![Otimização pos escalonamento (2)](./imagens/otimizacao-pos-escalonamento-2.png)
 
@@ -347,23 +370,27 @@ Em sistemas corporativos, as bases de dados não são armazenadas permanentement
 
 **Modelo ideal**
 ![Modelo ideal de operações em disco](./imagens/modelo-operacoes-disco-ideal.jpg)
+
 > **Observação:** O modelo de organização ideal deve levar em conta:
+>
 > * O tamanho e a frequência de acesso ao arquivo de dados
 
 **Buffer maiores:** Grandes com grandes frequências
 **Buffer menores:** Grandes arquivos com pouquíssima frequência (esta situação pode indicar acesso direto ao registro em disco, por meio de código em Assembly)
+
 > **Observação:** O objetivo é encontrar o tamanho de buffer ideal
 
 Em sistemas operacionais virtual machine é possível ajustar o buffer de disco sob demanda, durante uma seção que pode caracteriar a execução de um Job.
 
 Os sistemas operacionais virtuais fornecem uma formula para ajustar o tamanho do bloco:
 
-```
+```text
 FB = sizeOfRecord * numberOfRecords
 ```
 
-Exemplo:
-```
+**Exemplo:**
+
+```text
 sizeOfRecord = 1000B
 numberOfRecords = 100
 FB = 100000B
@@ -371,7 +398,7 @@ FB = 100000B
 
 Notemos que podemos ajustar o FB sem cálculo
 
-```
+```text
 FB = 110000B
 ```
 
@@ -387,6 +414,151 @@ Na prática os discos são recursos escassos. Qualquer organização armazena pe
 
 ![Esquema de um disco](./imagens/reducao-nivel-fragmentacao-disco.jpg)
 
+### Etapa 6: Meta-otimização
+
+Tipicamente durante o horário de pico de uma instituição, por exemplo, financeira, possui de 300 a 400 distintos sendo executados. Em bancos digitais esse número pode chegar até 600 processos.
+
+Sendo o objetivo otimizar o sistema de forma rápida e eficiente, pode levaer muito tempo para atingir uma condição ótima de funcionamento.
+
+![Meta-otimização (1)](./imagens/meta-otimizacao-1.jpg)
+
+Então é sugerido replicar algumas ações aplicadas a certos procesos para outros processos semelhantes.
+
+Esse procedimento não garante a eficácia, porem é eficiente na direção da otimização global. Não são todas as ações que podem ser replicadas.
+
+Por exemplo:
+
+* Recodificação do código ❌
+* Escalonamento de serviços ❌
+* Definição de fator de bloco (Diminui o número de I/O) ✔
+* Reorganização de arquivos em disco ✔
+
+![Meta-otimização (2)](./imagens/meta-otimizacao-2.jpg)
+
+**Procedimentos**
+
+Para cada processo devemos considerar aspectos quantitativos e qualitativos.
+
+```text
+Px = {
+    Variáveis qualitativas,
+    Variáveis quantitativas
+}
+
+Px = {
+    Sistema ao qual o processo está vinculado,
+    Tempo que fica disponível o processo,
+    Turno de disponibilidade,
+    Consumo de CPU,
+    Consumo de memória,
+    Número de I/O,
+    Nível de paginação
+}
+```
+
+* 1ª solução*: Tratar tudo como quantitativo (K-means)
+    * Transformar as categorias em números
+* 2ª solução*: Tratar tudo como qualitativo (K-modes)
+    * Transformar os números em categorias
+* 3ª solução*: Agrupar 1ª pelas variáveis qualitativas depois cada grupo pelas variáveis quantitativas
+    * A mais aconselhada
+
+> *Influência a eficiência da meta-otimização
+
+Até a etapa 6, as ações são exclusivamente **corretivas**, mas uma metodologia para o planejamento de capacidade deve propor ações para o futuro desempenho.
+
+### Etapa 7: Estimativa de carga futura de trabalho
+
+Uma etapa essencial para avaliar o desempenho futuro de um sistema é prver a carga de trabalho futura. Normalmente são aplicados modelos de regressão.
+
+![Modelo de regressão](./imagens/modelo-regressao.jpg)
+
+> **Observação:** Para determinar horário de pico
+
+#### Problemas de erros de previsão
+
+![Problemas de erros de previsão](./imagens/problemas-erro-previsao.jpg)
+
+> **Observação:** Até quando aplicar um modelo de regressão linear
+
+#### Algumas possíveis soluções
+
+```text
+λ-médio = t² + b
+
+lim(λ-médio) = lim(t²) + lim(b)
+lim(λ-médio) = 2 * lim(t) + lim(b)
+```
+
+![Algumas possíveis soluções](./imagens/possiveis-solucoes.jpg)
+
+##### Pearson
+
+```text
+-1 <= P <= 1
+```
+
+Dado `λ-estimado = a + (b * t)`
+
+```text
+a = (sum(λ-médio) * sum(t²) - sum(t) * sum(t * λ)) / (m * sum(t²) - sum(t)²)
+
+b = (m * sum(t * λ) - sum(t) * sum(λ)) / (m * sum(t²) - sum(t)²)
+```
+
+**Exemplo:**
+| Mês | `λ-médio` |
+|-|:-:|
+| Janeiro | 2 |
+| Fevereiro | 4 |
+| Março | 3 |
+| Abril | 6 |
+
+![Gráfico de regressão](./imagens/exemplo-grafico-regressao.jpg)
+
+```text
+sum(λ-médio) = 15
+sum(t) = 10
+sum(t * λ) = 41
+sum(t²) = 30
+
+a = (15 * 30 - 10 * 43) / (4 * 30 - 10²)
+  = (450 - 430) / 20
+  = 20 / 20
+  = 1
+
+b = (4 * 43 - 10 * 5) / (120 - 100)
+  = (172 - 150) / 20
+  = 22 / 20
+  = 1,1
+
+λ-estimado = 1 + 1,1 * t
+```
+
+| Mês       | `λ-médio` | `λ-estimado` | `|erro|` |
+|-----------|:---------:|:------------:|:--------:|
+| Janeiro   |         2 |          2,1 |      0,1 |
+| Fevereiro |         4 |          3,2 |      0,8 |
+| Março     |         3 |          4,3 |      1,3 |
+| Abril     |         6 |          5,4 |      0,6 |
+| Maio      |         - |          6,6 |      2,8 |
+
+```text
+|erro| = ±0,7
+```
+
+Logo:
+
+```text
+λ-estimado = 6,6 ± 0,7
+```
+
+para funs de desempenho:
+
+```text
+λ-estimado = 7,3
+```
+
 ### Etapa 8: Modelagem do sistema computacional
 
 A modelagem do sistema computacional deve ser iniciada quando for alcançado um correto escalonamento de serviços. Isto pelo fato dos modelos possuírem tantas equações como distintos processos sendo executados num determinado horário. Daí para utilizar o modelo para fim de previsão é necessário garantir que a natureza da carga é a mesma.
@@ -397,12 +569,13 @@ A modelagem do sistema computacional deve ser iniciada quando for alcançado um 
 `Ui`: Utilização do dispositivo `i`
 `R`: Tempo médio por requisição (segundos/requisição)
 
-```
+```text
 Di = Ui / X0, X0 = requisições/segundo
 ```
 
 **Exemplo:**
-```
+
+```text
 T0 = 1h
 C0 = Concluída 7200 requisições
 Ucpu = 60%
@@ -420,7 +593,8 @@ R = 7.75 segundos/requisição
 ```
 
 **Exemplo (aumentando a carga em 10%):**
-```
+
+```text
 R = (0.3  / (1 - 0.66))
   + (0.25 / (1 - 0.55))
   + (0.4  / (1 - 0.88))
@@ -431,7 +605,8 @@ R = 49.76 segundos/requisição
 ```
 
 **Exemplo (melhorando o código):**
-```
+
+```text
 R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
   + 0.55
   + 3.33
@@ -440,7 +615,6 @@ R = (0.3 * 0.9  / (1 - (0.66 * 0.9)))
 R = 0.66 + 0.55 + 3.33 + 45
 R = 49.54 segundos/requisição
 ```
-
 
 ### Etapa 9: Previsão do surgimento da fase de super-utilização
 
@@ -451,6 +625,7 @@ A fase de super-utiliação se caracteriza pelo fato de terminas alcançado a sa
 O termo permanente é um termo relativo e depende da finalidade do sistema computacional.
 
 Por exemplo:
+
 * Em sistemas de e-commerce
   * Permanente: Saturado acima de 10% do horário de pico.
     * Se horário de pico: 12:00 - 13:00
@@ -468,13 +643,14 @@ Por exemplo:
 
 #### Quando vai acontecer?
 
-```
+```text
 λ-médio = λ-sat = a + b * t
 t-sat = (λ-sat - a) / b
 ```
 
 **Tempo até `λ-sat` ocorrer:**
-```
+
+```text
 tempo = t-sat - hist. meses
 ```
 
@@ -498,10 +674,11 @@ Após obtenção de configuração ideal a próxima etapa procura a negociação
 
 Esta etapa, aparentemente a menos relevante, possui grande impacto financeiro, especialmente quando aplica sistemas *leasing* ou de aluguel de recursos.
 
-![](./imagens/negociacao-diretoria-fornecedores-exemplo-leasing.jpg)
+![Negociação com diretoria e fornecedores - Exemplo leasing](./imagens/negociacao-diretoria-fornecedores-exemplo-leasing.jpg)
 
 Nesta etapa é necessário o convencimento que a troca de hardware é necessária.
 
-<img src="./imagens/negociacao-diretoria-fornecedores.1.jpg" /> <img src="./imagens/negociacao-diretoria-fornecedores.2.jpg" />
+![Negociação com diretoria e fornecedores (1)](./imagens/negociacao-diretoria-fornecedores.1.jpg)
+![Negociação com diretoria e fornecedores (2)](./imagens/negociacao-diretoria-fornecedores.2.jpg)
 
 ### Etapa 12: Voltar ao passo 1
